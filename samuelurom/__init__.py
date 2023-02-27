@@ -19,4 +19,9 @@ def create_app(test_config=None):
     except OSError:
         pass
 
+    # import and register the database commands
+    # run ``flask --app [project_folder] init-db`` to initialize the database
+    from . import db
+    db.init_app(app)
+
     return app
