@@ -24,4 +24,8 @@ def create_app(test_config=None):
     from . import db
     db.init_app(app)
 
+    # Import and register auth blueprint to the app
+    from . import auth
+    app.register_blueprint(auth.blueprint)
+
     return app
