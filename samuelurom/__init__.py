@@ -28,4 +28,10 @@ def create_app(test_config=None):
     from . import auth
     app.register_blueprint(auth.blueprint)
 
+    # import and register page blueprint to the app
+    # page blueprint does not have a url_prefix. so index view will be at /
+    from . import pages
+    app.register_blueprint(pages.blueprint)
+    app.add_url_rule('/', endpoint='index')
+
     return app

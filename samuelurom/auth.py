@@ -22,6 +22,7 @@ def register():
     if request.method == 'POST':
         # get the submitted username and password data
         username = request.form['username']
+        full_name = request.form['full_name']
         email = request.form['email']
         password = request.form['password']
 
@@ -34,6 +35,8 @@ def register():
         # check if fields are empty and grab the error
         if not username:
             error = 'Username is required!'
+        elif not full_name:
+            error = 'Full name is required'
         elif not email:
             error = 'Email is required!'
         elif not password:
@@ -44,8 +47,8 @@ def register():
             try:
                 # insert user with hashed password
                 db.execute(
-                    'INSERT INTO user (username, email, password) VALUES (?, ?, ?)',
-                    (username, email, generate_password_hash(password),)
+                    'INSERT INTO user (username, full_name, email, password) VALUES (?, ?, ?, ?)',
+                    (username, full_name, email, generate_password_hash(password),)
                 )
 
                 # commit changes to database
