@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <h1>{% block title %}{{ post['post_title'] }}{% endblock %}</h1>
+    <span>Published {{ post['created_date'] }} by {{ post['full_name'] }}</span>
+{% endblock %}
+
+{% block content %}
+    <article>
+        {{ post['post_content']|safe }}
+        {% if g.user['id'] == post['author_id'] %}
+            <a href="{{ url_for('page.edit', id=post['id']) }}">Edit Post</a>
+        {% endif %}
+    </article>
+{% endblock %}

@@ -30,7 +30,9 @@ def create_app(test_config=None):
 
     # import and register page blueprint to the app
     # page blueprint does not have a url_prefix. so index view will be at /
+    # bind CKEditor instance to app
     from . import pages
+    pages.ckeditor.init_app(app)
     app.register_blueprint(pages.blueprint)
     app.add_url_rule('/', endpoint='index')
 

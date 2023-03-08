@@ -4,3 +4,19 @@
     <h1>{% block title %}Blog{% endblock %}</h1>
 {% endblock %}
 
+
+{% block content %}
+    <div class="blog">
+        {% for post in posts %}
+            <section class="container">
+                <h2>{{ post['post_title'] }}</h2>
+                <span>Published {{ post['created_date'] }} by {{ post['full_name'] }}</span>
+                <p>{{ post['post_description'] }}</p>
+                <a href="{{ url_for('page.single_post', post_url=post['post_url']) }}">Read more...</a>
+                {% if g.user['id'] == post['author_id'] %}
+                    <a href="{{ url_for('page.edit', id=post['id']) }}">Edit Post</a>
+                {% endif %}
+            </section>
+        {% endfor %}
+    <div class="blog_container"></div>
+{% endblock %}

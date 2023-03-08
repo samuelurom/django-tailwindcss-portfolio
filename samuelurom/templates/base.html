@@ -21,11 +21,12 @@
                 {% if g.user %}
                     <li><span>Hi {{ g.user['full_name'] }}!</span></li>
                     <li><a href="">About Me</a></li>
-                    <li><a href="{{ url_for('page_bp.blog') }}">Blog</a></li>
-                    <li><a href="{{ url_for('auth.logout') }}">Log Out</a></li>
+                    <li><a href="{{ url_for('page.blog') }}">Blog</a></li>
+                    <li><a href="{{ url_for('page.create') }}"><i class="fa-regular fa-pen-to-square menu_icon"></i> New Post</a></li>
+                    <li><a href="{{ url_for('auth.logout') }}"><i class="fa-solid fa-arrow-right-from-bracket menu_icon"></i> Log Out</a></li>
                 {% else %}
                 <li><a href="">About Me</a></li>
-                    <li><a href="{{ url_for('page_bp.blog') }}">Blog</a></li>
+                    <li><a href="{{ url_for('page.blog') }}">Blog</a></li>
                     <li><a href="{{ url_for('auth.login') }}">Log In</a></li>
                 {% endif %}
             </ul>

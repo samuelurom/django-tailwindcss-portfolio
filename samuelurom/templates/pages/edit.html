@@ -1,20 +1,20 @@
 {% extends 'base.html' %}
 
 {% block header %}
-    <h1>{% block title %}Create New Post{% endblock %}</h1>
+    <h1>{% block title %}Edit "{{ post['post_title'] }}"{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}
     {{ ckeditor.load() }}
     <form method="post">
         <label for="post_title">Title</label>
-        <input type="text" name="post_title" id="post_title" value="{{ request.form['post_title'] }}" required>
+        <input type="text" name="post_title" id="post_title" value="{{ request.form['post_title'] or post['post_title'] }}" required>
         <label for="post_url">URL</label>
-        <input type="text" name="post_url" id="post_url" value="{{ request.form['post_title'] }}" required>
+        <input type="text" name="post_url" id="post_url" value="{{ request.form['post_url'] or post['post_url'] }}" required>
         <label for="post_description">Meta Description</label>
-        <textarea name="post_description" id="post_description" cols="10" rows="2">{{ request.form['post_description'] }}</textarea>
+        <textarea name="post_description" id="post_description" cols="10" rows="2">{{ request.form['post_description'] or post['post_description'] }}</textarea>
         <label for="ckeditor">Content</label>
-        {{ ckeditor.create(value=request.form['post_content']) }}
+        {{ ckeditor.create(value=request.form['post_content'] or post['post_content']) }}
         <label for="published_status">Post Status</label>
         <select name="published_status" id="published_status" required>
             {% if request.form['published_status'] == 0 %}
@@ -29,5 +29,8 @@
             {% endif %}
         </select>
         <input type="submit" value="Save">
+    </form>
+    <form action="{{ url_for('page.delete', id=post['id']) }}" method="post">
+        <input type="submit" value="Delete" class="danger" onclick="return confirm('Are you sure you want to delete this post?');">
     </form>
 {% endblock %}

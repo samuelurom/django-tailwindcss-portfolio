@@ -16,7 +16,7 @@ CREATE TABLE post (
     post_description TEXT NOT NULL,
     post_content TEXT NOT NULL,
     published_status INTEGER NOT NULL DEFAULT 0,
-    post_url TEXT NOT NULL,
+    post_url TEXT UNIQUE NOT NULL,
     created_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (author_id) REFERENCES user (id)
