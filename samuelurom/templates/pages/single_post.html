@@ -1,15 +1,18 @@
 {% extends 'base.html' %}
 
 {% block header %}
+<article>
     <h1>{% block title %}{{ post['post_title'] }}{% endblock %}</h1>
-    <span>Published {{ post['created_date'] }} by {{ post['full_name'] }}</span>
+    <span>Published {{ post['created_date'].strftime('%d %B, %Y') }} by {{ post['full_name'] }}</span>
+    {% if post['featured_image'] %}
+        <img src="/uploads/{{ post['featured_image'] }}" alt="{{ post['post_title'] }}">
+    {% endif %}
 {% endblock %}
 
 {% block content %}
-    <article>
-        {{ post['post_content']|safe }}
-        {% if g.user['id'] == post['author_id'] %}
-            <a href="{{ url_for('page.edit', id=post['id']) }}">Edit Post</a>
-        {% endif %}
-    </article>
+    {{ post['post_content']|safe }}
+    {% if g.user['id'] == post['author_id'] %}
+        <a href="{{ url_for('page.edit', id=post['id']) }}">Edit Post</a>
+    {% endif %}
+</article>
 {% endblock %}

@@ -10,11 +10,14 @@
         {% for post in posts %}
             <section class="container">
                 <h2>{{ post['post_title'] }}</h2>
-                <span>Published {{ post['created_date'] }} by {{ post['full_name'] }}</span>
+                {% if post['featured_image'] %}
+                    <img src="/uploads/{{ post['featured_image'] }}" alt="{{ post['post_title'] }}">
+                {% endif %}
+                <span>Published {{ post['created_date'].strftime('%d %B, %Y') }} by {{ post['full_name'] }}</span>
                 <p>{{ post['post_description'] }}</p>
                 <a href="{{ url_for('page.single_post', post_url=post['post_url']) }}">Read more...</a>
                 {% if g.user['id'] == post['author_id'] %}
-                    <a href="{{ url_for('page.edit', id=post['id']) }}">Edit Post</a>
+                      |  <a href="{{ url_for('page.edit', id=post['id']) }}">Edit Post</a>
                 {% endif %}
             </section>
         {% endfor %}

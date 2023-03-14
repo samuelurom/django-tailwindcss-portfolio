@@ -13,6 +13,10 @@ def create_app(test_config=None):
         DATABASE=os.path.join(app.instance_path, 'samuelurom.sqlite'),
     )
 
+    # configure upload folder
+    path = os.getcwd()
+    app.config['UPLOAD_FOLDER'] = os.path.join(path, 'uploads')
+
     # ensure the instance folder exists
     try:
         os.makedirs(app.instance_path)

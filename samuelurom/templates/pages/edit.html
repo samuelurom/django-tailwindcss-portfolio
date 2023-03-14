@@ -6,7 +6,7 @@
 
 {% block content %}
     {{ ckeditor.load() }}
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         <label for="post_title">Title</label>
         <input type="text" name="post_title" id="post_title" value="{{ request.form['post_title'] or post['post_title'] }}" required>
         <label for="post_url">URL</label>
@@ -14,7 +14,7 @@
         <label for="post_description">Meta Description</label>
         <textarea name="post_description" id="post_description" cols="10" rows="2">{{ request.form['post_description'] or post['post_description'] }}</textarea>
         <label for="ckeditor">Content</label>
-        {{ ckeditor.create(value=request.form['post_content'] or post['post_content']) }}
+        {{ ckeditor.create(value=request.form['ckeditor'] or post['post_content']) }}
         <label for="published_status">Post Status</label>
         <select name="published_status" id="published_status" required>
             {% if request.form['published_status'] == 0 %}
@@ -28,6 +28,8 @@
                 <option value="1">Published</option>
             {% endif %}
         </select>
+        <label for="featured_image">Featured Image</label>
+        <input type="file" name="featured_image" id="featured_image">
         <input type="submit" value="Save">
     </form>
     <form action="{{ url_for('page.delete', id=post['id']) }}" method="post">

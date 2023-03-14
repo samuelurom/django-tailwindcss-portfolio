@@ -15,6 +15,7 @@ CREATE TABLE post (
     post_title TEXT NOT NULL,
     post_description TEXT NOT NULL,
     post_content TEXT NOT NULL,
+    featured_image TEXT,
     published_status INTEGER NOT NULL DEFAULT 0,
     post_url TEXT UNIQUE NOT NULL,
     created_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,

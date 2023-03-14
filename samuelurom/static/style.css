@@ -273,6 +273,14 @@ aside i {
     gap: 2rem;
 }
 
+.blog img, article img {
+    width: 100%;
+}
+
+article img {
+    margin-top: 20px;
+}
+
 /* Style for feedback form */
 form {
     width: 100%;

@@ -1,10 +1,13 @@
 from flask import (
-    Blueprint, flash, g, redirect, render_template, request, url_for
+    Blueprint, flash, g, redirect, render_template, request, url_for, current_app, send_from_directory
 )
 from werkzeug.exceptions import abort
 
 from flask_ckeditor import CKEditor
 from wtforms import TextAreaField
+
+from werkzeug.utils import secure_filename
+import os
 
 from samuelurom.auth import login_requried
 from samuelurom.db import get_db
@@ -14,6 +17,15 @@ blueprint = Blueprint('page', __name__)
 
 # Initialize new CKEditor instance
 ckeditor = CKEditor()
+
+# set upload folder and allowed extensions
+ALLOWED_EXTENSIONS = {'jpg', 'jpeg', 'png', 'gif'}
+
+
+# check if a file extension is valid
+def allowed_file(filename):
+    return '.' in filename and \
+        filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
 @blueprint.route('/')
@@ -32,7 +44,7 @@ def index():
 def blog():
     db = get_db()
     posts = db.execute(
-        '''SELECT post.id, post_title, post_description, post_url, created_date, author_id, full_name
+        '''SELECT post.id, post_title, post_description, post_url, created_date, featured_image, author_id, full_name
             FROM post JOIN user ON post.author_id = user.id
             ORDER BY created_date DESC
         '''
@@ -50,7 +62,8 @@ def create():
         post_title = request.form['post_title']
         post_url = request.form['post_url']
         post_description = request.form['post_description']
-        post_content = request.form['post_content']
+        post_content = request.form['ckeditor']
+        featured_image = request.files['featured_image']
         published_status = request.form['published_status']
 
         # initialize the error variable
@@ -66,22 +79,37 @@ def create():
         elif not post_url:
             error = 'Post URL is required'
 
+        # check if featured image is added to form and if UPLOAD_FOLDER directory eists
+        if not os.path.exists(current_app.config['UPLOAD_FOLDER']):
+            os.makedirs(current_app.config['UPLOAD_FOLDER'])
+
+        if featured_image and allowed_file(featured_image.filename):
+            featured_image_name = secure_filename(
+                featured_image.filename).lower()
+            featured_image.save(os.path.join(
+                current_app.config['UPLOAD_FOLDER'], featured_image_name))
+
         if error is not None:
             flash(error)
         else:
             # connect to database and insert record to post table
             db = get_db()
             db.execute(
-                '''INSERT INTO post (post_title, post_url, post_description, post_content, published_status, author_id)
-                    VALUES (?, ?, ?, ?, ?, ?)
+                '''INSERT INTO post (post_title, post_url, post_description, post_content, published_status, featured_image, author_id)
+                    VALUES (?, ?, ?, ?, ?, ?, ?)
                 ''',
                 (post_title, post_url, post_description,
-                 post_content, published_status, g.user['id'],)
+                 post_content, published_status, featured_image_name, g.user['id'],)
             )
             db.commit()
             return redirect(url_for('page.blog'))
 
     return render_template('pages/create.html')
+
+
+@blueprint.route('/uploads/<filename>')
+def uploads(filename):
+    return send_from_directory(current_app.config['UPLOAD_FOLDER'], filename)
 
 
 def get_post(id=None, url=None, check_author=True):
@@ -100,7 +128,7 @@ def get_post(id=None, url=None, check_author=True):
 
     if id:
         post = db.execute(
-            """SELECT post.id, post_title, post_url, post_description, post_content, created_date, author_id, full_name
+            """SELECT post.id, post_title, post_url, post_description, post_content, created_date, featured_image, author_id, full_name
                 FROM post JOIN user ON post.author_id = user.id
                 WHERE post.id = ?
             """, (id,)
@@ -111,14 +139,14 @@ def get_post(id=None, url=None, check_author=True):
 
     elif url:
         post = db.execute(
-            """SELECT post.id, post_title, post_url, post_description, post_content, created_date, author_id, full_name
+            """SELECT post.id, post_title, post_url, post_description, post_content, created_date, featured_image, author_id, full_name
                 FROM post JOIN user ON post.author_id = user.id
                 WHERE post.post_url = ?
             """, (url,)
         ).fetchone()
 
     if post is None:
-        abort(404, f"Post id {id} doesn't exist.")
+        abort(404, f"Oops! Post doesn't exist.")
 
     return post
 
@@ -143,6 +171,7 @@ def edit(id):
         post_url = request.form['post_url']
         post_description = request.form['post_description']
         post_content = request.form['ckeditor']
+        featured_image = request.files['featured_image']
         published_status = request.form['published_status']
 
         # initialize the error variable
@@ -158,6 +187,16 @@ def edit(id):
         elif not post_url:
             error = 'Post URL is required'
 
+        # check if featured image is added to form and if UPLOAD_FOLDER directory eists
+        if not os.path.exists(current_app.config['UPLOAD_FOLDER']):
+            os.makedirs(current_app.config['UPLOAD_FOLDER'])
+
+        if featured_image and allowed_file(featured_image.filename):
+            featured_image_name = secure_filename(
+                featured_image.filename).lower()
+            featured_image.save(os.path.join(
+                current_app.config['UPLOAD_FOLDER'], featured_image_name))
+
         if error is not None:
             flash(error)
         else:
@@ -165,11 +204,11 @@ def edit(id):
             db = get_db()
             db.execute(
                 '''UPDATE post
-                    SET post_title = ?, post_url = ?, post_description = ?, post_content = ?, published_status = ?
+                    SET post_title = ?, post_url = ?, post_description = ?, post_content = ?, featured_image =?, published_status = ?
                     WHERE id = ?
                 ''',
                 (post_title, post_url, post_description,
-                 post_content, published_status, id,)
+                 post_content, featured_image_name, published_status, id,)
             )
             db.commit()
             return redirect(url_for('page.blog'))
@@ -189,4 +228,4 @@ def delete(id):
     db = get_db()
     db.execute('DELETE FROM post WHERE id = ?', (id,))
     db.commit()
-    return redirect(url_for('page.index'))
+    return redirect(url_for('page.blog'))
