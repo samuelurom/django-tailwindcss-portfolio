@@ -16,7 +16,7 @@
 body {
     background-color: #111821;
     font-family: var(--pri-font);
-    font-size: 1rem;
+    font-size: 1.15rem;
     font-weight: 300;
     line-height: 1.5;
     margin: 0;
@@ -281,6 +281,11 @@ article img {
     margin-top: 20px;
 }
 
+article {
+    width: 80%;
+    margin: auto;
+}
+
 /* Style for feedback form */
 form {
     width: 100%;
@@ -435,5 +440,14 @@ footer p {
         position: relative;
         top: 50%;
         transform: translateY(-50%);
+    }
+
+    /* Blog section */
+    .blog {
+        display: block;
+    }
+
+    article {
+        width: 100%;
     }
 }

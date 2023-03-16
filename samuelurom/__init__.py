@@ -6,12 +6,13 @@ def create_app(test_config=None):
     """Create and configure an instance of the Flask application."""
     app = Flask(__name__, instance_relative_config=True)
 
-    app.config.from_mapping(
-        # default secret - should be overridden by instance config
-        SECRET_KEY='y$B&E)H@McQfTjWnZq4t7w!z%C*F-JaN',
-        # store database in instance folder
-        DATABASE=os.path.join(app.instance_path, 'samuelurom.sqlite'),
-    )
+    # load the configuration settings for secrete key and mail server
+    from . import config
+    app.config.from_mapping(config.config)
+
+    # store database in instance folder
+    app.config['DATABASE'] = os.path.join(
+        app.instance_path, 'samuelurom.sqlite')
 
     # configure upload folder
     path = os.getcwd()
@@ -34,10 +35,13 @@ def create_app(test_config=None):
 
     # import and register page blueprint to the app
     # page blueprint does not have a url_prefix. so index view will be at /
-    # bind CKEditor instance to app
     from . import pages
+    # bind CKEditor instance to app
     pages.ckeditor.init_app(app)
     app.register_blueprint(pages.blueprint)
     app.add_url_rule('/', endpoint='index')
+
+    # bind Mail instance to app
+    pages.mail.init_app(app)
 
     return app

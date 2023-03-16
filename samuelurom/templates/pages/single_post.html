@@ -3,7 +3,7 @@
 {% block header %}
 <article>
     <h1>{% block title %}{{ post['post_title'] }}{% endblock %}</h1>
-    <span>Published {{ post['created_date'].strftime('%d %B, %Y') }} by {{ post['full_name'] }}</span>
+    <span>Published {{ post['created_date'].strftime('%d %B, %Y') }} <b>&middot;</b> by {{ post['full_name'] }}</span>
     {% if post['featured_image'] %}
         <img src="/uploads/{{ post['featured_image'] }}" alt="{{ post['post_title'] }}">
     {% endif %}

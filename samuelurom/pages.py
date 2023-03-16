@@ -9,6 +9,8 @@ from wtforms import TextAreaField
 from werkzeug.utils import secure_filename
 import os
 
+from flask_mail import Mail, Message
+
 from samuelurom.auth import login_requried
 from samuelurom.db import get_db
 
@@ -17,6 +19,10 @@ blueprint = Blueprint('page', __name__)
 
 # Initialize new CKEditor instance
 ckeditor = CKEditor()
+
+# initialie new Mail instance
+mail = Mail()
+admin_email = 'hello@samuelurom.com'
 
 # set upload folder and allowed extensions
 ALLOWED_EXTENSIONS = {'jpg', 'jpeg', 'png', 'gif'}
@@ -146,7 +152,7 @@ def get_post(id=None, url=None, check_author=True):
         ).fetchone()
 
     if post is None:
-        abort(404, f"Oops! Post doesn't exist.")
+        abort(404, f"Oops! That page doesn't exist.")
 
     return post
 
@@ -229,3 +235,42 @@ def delete(id):
     db.execute('DELETE FROM post WHERE id = ?', (id,))
     db.commit()
     return redirect(url_for('page.blog'))
+
+
+@blueprint.route('/contact/', methods=('GET', 'POST'))
+def contact():
+    """Send contact form by email.
+    """
+    sender_name = None
+
+    if request.method == 'POST':
+        sender_name = request.form['name']
+        sender_email = request.form['email']
+        contact_subject = request.form['subject']
+        contact_message = request.form['message']
+
+        # initialize error
+        error = None
+
+        if not sender_name:
+            error = 'Sender name required.'
+        elif not sender_email:
+            error = 'Sender email required.'
+        elif not contact_subject:
+            error = 'Subject required.'
+        elif not contact_message:
+            error = 'Message can not be empty.'
+
+        if error is not None:
+            flash(error)
+        else:
+            new_message = Message(contact_subject, recipients=[
+                admin_email], sender=sender_name)
+            new_message.body = f'''
+From: {sender_name}<{sender_email}>
+
+{contact_message}'''
+            mail.send(new_message)
+            current_url = request.path
+
+    return render_template('pages/contact.html', sender_name=sender_name)
