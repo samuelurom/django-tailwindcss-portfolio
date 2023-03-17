@@ -239,6 +239,10 @@ aside i {
     color: #F47D2E;
 }
 
+.fa-react {
+    color: #087ea4;
+}
+
 .icon {
     color: var(--accent-color);
     font-size: 1.8rem;

@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 
+{% block og_title %}{{ post['post_title'] }}{% endblock %}
+{% block og_description %}{{ post['post_description'] }}{% endblock %}
+{% block og_image %}/uploads/{{ post['featured_image'] }}{% endblock %}
+
 {% block header %}
 <article>
     <h1>{% block title %}{{ post['post_title'] }}{% endblock %}</h1>

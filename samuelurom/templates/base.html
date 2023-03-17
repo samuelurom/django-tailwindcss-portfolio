@@ -9,6 +9,9 @@
         <script src="https://kit.fontawesome.com/6dd2932751.js" crossorigin="anonymous"></script>
         <title>{% block title %}{% endblock %} – Samuel Urom</title>
         <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/favicon.png') }}">
+        <meta property="og:title" content="{% block og_title %}{% endblock %}" />
+        <meta property="og:description" content="{% block og_description %}{% endblock %}" />
+        <meta property="og:image" content="{% block og_image %}{% endblock %}" />
     </head>
     <body>
         <header>
@@ -18,17 +21,15 @@
                     <i class="fa-solid fa-bars"></i>
                 </div>
                 <ul class="nav-menu">
+                    <li><a href="{{ url_for('page.projects') }}">Projects</a></li>
+                    <li><a href="{{ url_for('page.blog') }}">Blog</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="" class="download-menu">Download CV</a></li>
                     {% if g.user %}
-                        <li><span>Hi {{ g.user['full_name'] }}!</span></li>
-                        <li><a href="{{ url_for('page.projects') }}">Projects</a></li>
-                        <li><a href="{{ url_for('page.blog') }}">Blog</a></li>
-                        <li><a href="" class="download-menu">Download CV</a></li>
-                        <li><a href="{{ url_for('auth.logout') }}"><i class="fa-solid fa-arrow-right-from-bracket menu_icon"></i> Log Out</a></li>
+                    <li><span>Hi {{ g.user['full_name'] }}!</span></li>
+                    <li><a href="{{ url_for('auth.logout') }}"><i class="fa-solid fa-arrow-right-from-bracket menu_icon"></i> Log Out</a></li>
                     {% else %}
-                        <li><a href="{{ url_for('page.projects') }}">Projects</a></li>
-                        <li><a href="{{ url_for('page.blog') }}">Blog</a></li>
-                        <li><a href="" class="download-menu">Download CV</a></li>
-                        <li><a href="{{ url_for('auth.login') }}">Log In</a></li>
+                    <li><a href="{{ url_for('auth.login') }}">Log In</a></li>
                     {% endif %}
                 </ul>
             </nav>
