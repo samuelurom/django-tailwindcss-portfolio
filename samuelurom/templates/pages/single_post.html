@@ -12,7 +12,7 @@
 {% block content %}
     {{ post['post_content']|safe }}
     {% if g.user['id'] == post['author_id'] %}
-        <a href="{{ url_for('page.edit', id=post['id']) }}">Edit Post</a>
+        <a href="{{ url_for('page.edit', id=post['id']) }}"><i class="fa-regular fa-pen-to-square menu_icon"></i> Edit Post</a>
     {% endif %}
 </article>
 {% endblock %}

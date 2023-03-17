@@ -40,7 +40,7 @@ def index():
     recent_posts = db.execute(
         '''SELECT post.id, post_title, post_description, post_url, created_date, author_id, full_name
             FROM post JOIN user ON post.author_id = user.id
-            ORDER BY created_date DESC
+            ORDER BY created_date DESC;
         '''
     ).fetchmany(2)
     return render_template('pages/index.html', recent_posts=recent_posts)
@@ -52,10 +52,25 @@ def blog():
     posts = db.execute(
         '''SELECT post.id, post_title, post_description, post_url, created_date, featured_image, author_id, full_name
             FROM post JOIN user ON post.author_id = user.id
-            ORDER BY created_date DESC
+            WHERE post_type = "blog"
+            ORDER BY created_date DESC;
         '''
     ).fetchall()
     return render_template('pages/blog.html', posts=posts)
+
+
+@blueprint.route('/projects/')
+def projects():
+
+    db = get_db()
+    projects = db.execute(
+        '''SELECT post.id, post_title, post_description, post_url, created_date, featured_image, author_id, full_name
+            FROM post JOIN user ON post.author_id = user.id
+            WHERE post_type = "project"
+            ORDER BY created_date DESC;
+        '''
+    ).fetchall()
+    return render_template('pages/projects.html', projects=projects)
 
 
 @blueprint.route('/create/', methods=('GET', 'POST'))
@@ -70,7 +85,7 @@ def create():
         post_description = request.form['post_description']
         post_content = request.form['ckeditor']
         featured_image = request.files['featured_image']
-        published_status = request.form['published_status']
+        post_type = request.form['post_type']
 
         # initialize the error variable
         error = None
@@ -101,11 +116,11 @@ def create():
             # connect to database and insert record to post table
             db = get_db()
             db.execute(
-                '''INSERT INTO post (post_title, post_url, post_description, post_content, published_status, featured_image, author_id)
-                    VALUES (?, ?, ?, ?, ?, ?, ?)
+                '''INSERT INTO post (post_title, post_url, post_description, post_content, post_type, featured_image, author_id)
+                    VALUES (?, ?, ?, ?, ?, ?, ?);
                 ''',
                 (post_title, post_url, post_description,
-                 post_content, published_status, featured_image_name, g.user['id'],)
+                 post_content, post_type, featured_image_name, g.user['id'],)
             )
             db.commit()
             return redirect(url_for('page.blog'))
@@ -134,9 +149,9 @@ def get_post(id=None, url=None, check_author=True):
 
     if id:
         post = db.execute(
-            """SELECT post.id, post_title, post_url, post_description, post_content, created_date, featured_image, author_id, full_name
+            """SELECT post.id, post_title, post_url, post_description, post_content, post_type, created_date, featured_image, author_id, full_name
                 FROM post JOIN user ON post.author_id = user.id
-                WHERE post.id = ?
+                WHERE post.id = ?;
             """, (id,)
         ).fetchone()
 
@@ -147,7 +162,7 @@ def get_post(id=None, url=None, check_author=True):
         post = db.execute(
             """SELECT post.id, post_title, post_url, post_description, post_content, created_date, featured_image, author_id, full_name
                 FROM post JOIN user ON post.author_id = user.id
-                WHERE post.post_url = ?
+                WHERE post.post_url = ?;
             """, (url,)
         ).fetchone()
 
@@ -178,7 +193,7 @@ def edit(id):
         post_description = request.form['post_description']
         post_content = request.form['ckeditor']
         featured_image = request.files['featured_image']
-        published_status = request.form['published_status']
+        post_type = request.form['post_type']
 
         # initialize the error variable
         error = None
@@ -210,11 +225,11 @@ def edit(id):
             db = get_db()
             db.execute(
                 '''UPDATE post
-                    SET post_title = ?, post_url = ?, post_description = ?, post_content = ?, featured_image =?, published_status = ?
-                    WHERE id = ?
+                    SET post_title = ?, post_url = ?, post_description = ?, post_content = ?, featured_image =?, post_type = ?
+                    WHERE id = ?;
                 ''',
                 (post_title, post_url, post_description,
-                 post_content, featured_image_name, published_status, id,)
+                 post_content, featured_image_name, post_type, id,)
             )
             db.commit()
             return redirect(url_for('page.blog'))
@@ -232,7 +247,7 @@ def delete(id):
     """
     get_post(id=id)
     db = get_db()
-    db.execute('DELETE FROM post WHERE id = ?', (id,))
+    db.execute('DELETE FROM post WHERE id = ?;', (id,))
     db.commit()
     return redirect(url_for('page.blog'))
 

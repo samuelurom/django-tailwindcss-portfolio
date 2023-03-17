@@ -2,6 +2,10 @@
 
 {% block header %}
     <h1>{% block title %}Blog{% endblock %}</h1>
+    {% if g.user %}
+        <a href="{{ url_for('page.create') }}" class="create-menu"><i class="fa-regular fa-pen-to-square menu_icon"></i> New Post</a>
+    {% endif %}
+    <hr>
 {% endblock %}
 
 
@@ -17,7 +21,7 @@
                 <p>{{ post['post_description'] }}</p>
                 <a href="{{ url_for('page.single_post', post_url=post['post_url']) }}">Read more...</a>
                 {% if g.user['id'] == post['author_id'] %}
-                      |  <a href="{{ url_for('page.edit', id=post['id']) }}">Edit Post</a>
+                    &nbsp;&nbsp;<a href="{{ url_for('page.edit', id=post['id']) }}"><i class="fa-regular fa-pen-to-square menu_icon"></i> Edit Post</a>
                 {% endif %}
             </section>
         {% endfor %}

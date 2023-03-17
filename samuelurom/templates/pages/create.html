@@ -15,18 +15,10 @@
         <textarea name="post_description" id="post_description" cols="10" rows="2">{{ request.form['post_description'] }}</textarea>
         <label for="ckeditor">Content</label>
         {{ ckeditor.create(value=request.form['ckeditor']) }}
-        <label for="published_status">Post Status</label>
-        <select name="published_status" id="published_status" required>
-            {% if request.form['published_status'] == 0 %}
-                <option value="0" selected>Draft</option>
-                <option value="1">Published</option>
-            {% elif request.form['published_status'] == 1 %}
-                <option value="0">Draft</option>
-                <option value="1" selected>Published</option>
-            {% else %}
-                <option value="0">Draft</option>
-                <option value="1">Published</option>
-            {% endif %}
+        <label for="post_type">Post Type</label>
+        <select name="post_type" id="post_type" required>
+            <option value="blog" {% if request.form['post_type'] == 'blog' %}selected{% endif %}>Blog</option>
+            <option value="project" {% if request.form['post_type'] == 'project' %}selected{% endif %}>Project</option>
         </select>
         <label for="featured_image">Featured Image</label>
         <input type="file" name="featured_image" id="featured_image">
