@@ -1,5 +1,6 @@
 from datetime import datetime
 from django.db import models
+from django_quill.fields import QuillField
 
 # Create your models here.
 
@@ -49,7 +50,7 @@ class PageSettings(models.Model):
     about_page_title = models.CharField(max_length=255, null=True, blank=True)
     about_page_subtitle = models.CharField(max_length=255, null=True, blank=True)
     about_page_description = models.CharField(max_length=255, null=True, blank=True)
-    full_bio = models.TextField(null=True, blank=True)
+    full_bio = QuillField(null=True, blank=True)
     experience_subtitle = models.CharField(max_length=255, null=True, blank=True)
     experience_description = models.CharField(max_length=255, null=True, blank=True)
     projects_archive_title = models.CharField(max_length=255, null=True, blank=True)

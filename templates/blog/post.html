@@ -1,4 +1,12 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block header_includes %}
+<!-- Quill css and highlight.js -->
+<link rel="stylesheet" href="{% static 'css/custom.css' %}">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/darcula.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+{% endblock %}
 
 {% block og_image %}{{ post.featured_image }}{% endblock %}
 
@@ -87,7 +95,7 @@
                 <img src="/media/{{ post.featured_image }}" alt="{{ project.title }}" class="mt-3 rounded-2xl">
             </header>
             <div class="mt-8 space-y-7 text-base text-gray-600 dark:text-gray-400">
-                {{ post.body }}
+                {{ post.body.html|safe }}
             </div>
         </article>
         <div class="flex justify-center mt-10">

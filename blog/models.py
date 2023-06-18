@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.text import slugify
 from django.utils import timezone
+from django_quill.fields import QuillField
 
 
 class Tag(models.Model):
@@ -38,7 +39,7 @@ class Post(models.Model):
     title = models.CharField(max_length=255, db_index=True, unique=True)
     slug = models.SlugField(max_length=255, unique=True, blank=True)
     description = models.TextField(null=True, blank=True)
-    body = models.TextField()
+    body = QuillField("body")
     tags = models.ManyToManyField(Tag)
     featured_image = models.ImageField(max_length=255, null=True, blank=True)
     status = models.CharField(max_length=8, choices=POST_STATUS_CHOICES, default=DRAFT)

@@ -25,7 +25,7 @@
 
         <!-- Download button -->
         <div class="mt-12 group">
-            <a class="w-full inline-flex items-center gap-2 justify-center transition animate-bounce rounded-xl py-3 px-3 text-base outline-offset-2 transition animate-bounce bg-white shadow-md shadow-gray-800/5 ring-1 ring-gray-900/5 transition text-gray-600 dark:text-gray-400 group-hover:text-teal-500 dark:border dark:border-gray-700/50 dark:bg-gray-800 dark:ring-0 dark:ring-white/10 dark:hover:ring-white/20"
+            <a class="w-full inline-flex items-center gap-2 justify-center rounded-xl py-3 px-3 text-base outline-offset-2 animate-bounce bg-white shadow-md shadow-gray-800/5 ring-1 ring-gray-900/5 transition text-gray-600 dark:text-gray-400 group-hover:text-teal-500 dark:border dark:border-gray-700/50 dark:bg-gray-800 dark:ring-0 dark:ring-white/10 dark:hover:ring-white/20"
                 href="/media/{{ page_info.resume }}" target="_blank">
                 Download My Resume
                 <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"
@@ -45,7 +45,7 @@
             {{ page_info.about_page_subtitle }}
         </h2>
         <div class="mt-6 space-y-7 text-base text-zinc-600 dark:text-zinc-400">
-            {{ page_info.full_bio }}
+            {{ page_info.full_bio.html|safe }}
         </div>
 
         <h2 class="mt-12 text-xl font-medium text-gray-600 dark:text-gray-400 sm:text-2xl">

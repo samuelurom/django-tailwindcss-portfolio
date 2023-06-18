@@ -23,7 +23,7 @@ def post(request, slug):
     post = get_object_or_404(Post, slug=slug)
 
     # Get number of words in post
-    num_words = len(post.body.split())
+    num_words = len(post.body.html.split())
 
     # Get read time in mins = num_words / 265 -> Average reading time is 265 WPM
     # value is rounded up

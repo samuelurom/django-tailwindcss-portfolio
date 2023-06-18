@@ -1,6 +1,7 @@
 from typing import Iterable, Optional
 from django.db import models
 from django.utils.text import slugify
+from django_quill.fields import QuillField
 
 
 # Create your models here.
@@ -11,7 +12,7 @@ class Project(models.Model):
     website = models.URLField(max_length=255, null=True, blank=True)
     github = models.URLField(max_length=255, null=True, blank=True)
     description = models.TextField(null=True, blank=True)
-    body = models.TextField(null=True, blank=True)
+    body = QuillField(null=True, blank=True)
     featured = models.BooleanField(default=False)
 
     def __str__(self):

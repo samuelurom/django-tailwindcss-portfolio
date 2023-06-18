@@ -20,6 +20,8 @@
     <meta property="og:description" content="{% block og_description %}{% endblock %}" />
     <meta property="og:image"
         content="{{ request.scheme }}://{{ request.get_host }}/media/{% block og_image %}{% endblock %}" />
+    <script src="{% static 'js/theme.js' %}"></script>
+    {% block header_includes %}{% endblock %}
 </head>
 
 <body class="flex h-full flex-col bg-gray-50 dark:bg-gray-900">

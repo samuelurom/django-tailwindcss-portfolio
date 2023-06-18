@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "blog",
     "project",
     "main",
+    "django_quill",
 ]
 
 MIDDLEWARE = [

@@ -99,7 +99,7 @@
                 </div>
             </header>
             <div class="mt-8 prose dark:prose-invert text-gray-800 dark:text-gray-100">
-                {{ project.body }}
+                {{ project.body.html|safe }}
             </div>
         </article>
     </div>
