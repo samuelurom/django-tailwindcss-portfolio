@@ -2,21 +2,27 @@
 
 {% load static %}
 
+{% block og_image %}{{ settings.profile_image }}{% endblock %}
+
 {% block header_image %}
 <img src="/media/{{ settings.profile_image }}" alt="{{ settings.title }}"
     class="rounded-full bg-zinc-100 object-cover dark:bg-gray-800/90 w-48 h-48 lg:w-80 lg:h-80" />
 {% endblock %}
 
+{% block og_title %}
 {% block header %}
 {{ settings.site_title }}
+{% endblock %}
 {% endblock %}
 
 {% block subheader %}
 {{ settings.subtitle }}
 {% endblock %}
 
+{% block og_description %}
 {% block description %}
 {{ settings.short_bio }}
+{% endblock %}
 {% endblock %}
 
 {% block social_icons %}

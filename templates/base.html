@@ -16,6 +16,10 @@
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
     </link>
     <link rel="icon" type="image/x-icon" href="/media/{{ settings.icon }}">
+    <meta property="og:title" content="{% block og_title %}{% endblock %}" />
+    <meta property="og:description" content="{% block og_description %}{% endblock %}" />
+    <meta property="og:image"
+        content="{{ request.scheme }}://{{ request.get_host }}/media/{% block og_image %}{% endblock %}" />
 </head>
 
 <body class="flex h-full flex-col bg-gray-50 dark:bg-gray-900">

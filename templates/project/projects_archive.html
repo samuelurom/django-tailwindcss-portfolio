@@ -1,11 +1,17 @@
 {% extends 'base.html' %}
 
+{% block og_image %}{{ project.featured_image }}{% endblock %}
+
+{% block og_title %}
 {% block title %}
 {% block header %}{{ page.projects_archive_title }}{% endblock %}
 {% endblock %}
+{% endblock %}
 
+{% block og_description %}
 {% block description %}
 {{ page.projects_archive_description }}
+{% endblock %}
 {% endblock %}
 
 {% block content %}

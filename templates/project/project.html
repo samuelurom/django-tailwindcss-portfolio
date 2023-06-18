@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
 
+{% block og_description %}{{ project.description }}{% endblock %}
+{% block og_image %}{{ project.featured_image }}{% endblock %}
+
+{% block og_title %}
 {% block title %}{{ project.title }}{% endblock %}
+{% endblock %}
 
 {% block content %}
 

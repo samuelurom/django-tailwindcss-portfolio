@@ -1,11 +1,17 @@
 {% extends 'base.html' %}
 
+{% block og_title %}
 {% block title %}
 {% block header %}{{ page_info.about_page_title }}{% endblock %}
 {% endblock %}
+{% endblock %}
 
+{% block og_image %}{{ settings.profile_image }}{% endblock %}
+
+{% block og_description %}
 {% block description %}
 {{ page_info.about_page_description }}
+{% endblock %}
 {% endblock %}
 
 {% block content %}
