@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 
+{% block og_image %}{{ settings.profile_image }}{% endblock %}
+
+{% block og_title %}
 {% block title %}{{ page_info.contact_page_title }}{% endblock %}
+{% endblock %}
 
 {% block content %}
 
@@ -12,7 +16,7 @@
             </h1>
         </header>
         <div class="mt-8 space-y-7 text-base text-gray-600 dark:text-gray-400">
-            {{ page_info.contact_page_description }}
+            {% block og_description %}{{ page_info.contact_page_description }}{% endblock %}
         </div>
 
 
