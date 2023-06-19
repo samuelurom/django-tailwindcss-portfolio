@@ -1,5 +1,11 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
+{% block header_includes %}
+<link rel="stylesheet" href="{% static 'css/custom.css' %}">
+{% endblock %}
+
 {% block og_description %}{{ project.description }}{% endblock %}
 {% block og_image %}{{ project.featured_image }}{% endblock %}
 
@@ -98,7 +104,7 @@
                     </ul>
                 </div>
             </header>
-            <div class="mt-8 prose dark:prose-invert text-gray-800 dark:text-gray-100">
+            <div class="relative mt-8 prose dark:prose-invert text-gray-800 dark:text-gray-100 ql-content">
                 {{ project.body.html|safe }}
             </div>
         </article>

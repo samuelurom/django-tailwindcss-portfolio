@@ -5,3 +5,28 @@
     padding: 1rem;
     border-radius: 1rem;
 }
+
+.ql-content p,
+.ql-content ol,
+.ql-content ul,
+.ql-content pre,
+.ql-content blockquote,
+.ql-content h1,
+.ql-content h2,
+.ql-content h3,
+.ql-content h4,
+.ql-content h5,
+.ql-content h6,
+.ql-editor p,
+.ql-editor ol,
+.ql-editor ul,
+.ql-editor pre,
+.ql-editor blockquote,
+.ql-editor h1,
+.ql-editor h2,
+.ql-editor h3,
+.ql-editor h4,
+.ql-editor h5,
+.ql-editor h6 {
+    margin-bottom: 1rem;
+}
