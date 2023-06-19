@@ -62,7 +62,7 @@ class Post(models.Model):
             self.publish_date = timezone.now()
         elif self.status == self.DRAFT and self.publish_date:
             self.publish_date = None
-        elif self.publish_date > timezone.now():
+        elif self.publish_date is not None and self.publish_date > timezone.now():
             self.status = self.SCHEDULE
         elif self.status == self.SCHEDULE and self.publish_date <= timezone.now():
             self.status = self.PUBLISH
