@@ -6,9 +6,9 @@ from django_quill.fields import QuillField
 
 
 class SiteSettings(models.Model):
-    SETTING_TYPE = "settings"
+    SETTING_TYPE = "site-settings"
 
-    SETTING_CHOICES = [(SETTING_TYPE, "settings")]
+    SETTING_CHOICES = [(SETTING_TYPE, "site-settings")]
 
     setting_type = models.CharField(
         primary_key=True, max_length=13, choices=SETTING_CHOICES, default=SETTING_TYPE
@@ -34,9 +34,9 @@ class SiteSettings(models.Model):
 
 
 class PageSettings(models.Model):
-    SETTING_TYPE = "settings"
+    SETTING_TYPE = "page-settings"
 
-    SETTING_CHOICES = [(SETTING_TYPE, "settings")]
+    SETTING_CHOICES = [(SETTING_TYPE, "page-settings")]
 
     # Set setting_type as primary key with only "page setting" as input
     # To ensure only one record is entered in table
