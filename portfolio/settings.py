@@ -27,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config("DJANGO_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [".vercel.app", ".now.sh", "127.0.0.1"]
 
@@ -81,16 +81,24 @@ WSGI_APPLICATION = "portfolio.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql" or "django.db.backends.sqlite3",
-        "NAME": config("POSTGRES_NAME") or BASE_DIR / "db.sqlite3",
-        "URL": config("POSTGRES_URL"),
-        "USER": config("POSTGRES_USER"),
-        "PASSWORD": config("POSTGRES_PASSWORD"),
-        "HOST": config("POSTGRES_HOST"),
+if DEBUG:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
     }
-}
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": config("POSTGRES_NAME"),
+            "URL": config("POSTGRES_URL"),
+            "USER": config("POSTGRES_USER"),
+            "PASSWORD": config("POSTGRES_PASSWORD"),
+            "HOST": config("POSTGRES_HOST"),
+        }
+    }
 
 
 # Password validation
