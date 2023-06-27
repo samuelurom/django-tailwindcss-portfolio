@@ -27,7 +27,7 @@ class SiteSettings(models.Model):
     footer_text = models.CharField(max_length=255, null=True, blank=True)
 
     def __str__(self):
-        return f"Settings: {self.site_title} - {self.subtitle}"
+        return f"Site-settings"
 
     class Meta:
         verbose_name_plural = "Site settings"
@@ -63,7 +63,7 @@ class PageSettings(models.Model):
     contact_page_description = models.CharField(max_length=255, null=True, blank=True)
 
     def __str__(self):
-        return "Page Settings"
+        return "Page-settings"
 
     class Meta:
         verbose_name_plural = "Page settings"
