@@ -6,9 +6,9 @@ from django_quill.fields import QuillField
 
 
 class SiteSettings(models.Model):
-    SETTING_TYPE = "site-settings"
+    SETTING_TYPE = "settings"
 
-    SETTING_CHOICES = [(SETTING_TYPE, "site-settings")]
+    SETTING_CHOICES = [(SETTING_TYPE, "settings")]
 
     setting_type = models.CharField(
         primary_key=True, max_length=13, choices=SETTING_CHOICES, default=SETTING_TYPE
@@ -27,16 +27,16 @@ class SiteSettings(models.Model):
     footer_text = models.CharField(max_length=255, null=True, blank=True)
 
     def __str__(self):
-        return f"Settings: {self.site_title} - {self.subtitle}"
+        return "Update Site Settings"
 
     class Meta:
         verbose_name_plural = "Site settings"
 
 
 class PageSettings(models.Model):
-    SETTING_TYPE = "page-settings"
+    SETTING_TYPE = "settings"
 
-    SETTING_CHOICES = [(SETTING_TYPE, "page-settings")]
+    SETTING_CHOICES = [(SETTING_TYPE, "settings")]
 
     # Set setting_type as primary key with only "page setting" as input
     # To ensure only one record is entered in table
@@ -63,7 +63,7 @@ class PageSettings(models.Model):
     contact_page_description = models.CharField(max_length=255, null=True, blank=True)
 
     def __str__(self):
-        return f"Settings: Page Settings"
+        return "Update Page settings"
 
     class Meta:
         verbose_name_plural = "Page settings"
