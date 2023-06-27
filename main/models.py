@@ -6,7 +6,7 @@ from django_quill.fields import QuillField
 
 
 class SiteSettings(models.Model):
-    SETTING_TYPE = "site settings"
+    SETTING_TYPE = "site-settings"
 
     SETTING_CHOICES = [(SETTING_TYPE, "site-settings")]
 
@@ -34,7 +34,7 @@ class SiteSettings(models.Model):
 
 
 class PageSettings(models.Model):
-    SETTING_TYPE = "page settings"
+    SETTING_TYPE = "page-settings"
 
     SETTING_CHOICES = [(SETTING_TYPE, "page-settings")]
 
