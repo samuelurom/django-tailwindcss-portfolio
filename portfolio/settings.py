@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-import os
 
 # Import to manage environment variable
 from decouple import config
@@ -142,7 +141,7 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 
-# STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles_build", "static")
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # Media files storage
 MEDIA_URL = "media/"
