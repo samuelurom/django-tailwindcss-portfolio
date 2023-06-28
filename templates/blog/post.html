@@ -8,7 +8,9 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
 {% endblock %}
 
-{% block og_image %}{{ post.featured_image }}{% endblock %}
+{% if post.featured_image %}
+{% block og_image %}{{ post.featured_image.url }}{% endblock %}
+{% endif %}
 
 {% block og_description %}{{ post.description }}{% endblock %}
 
@@ -92,7 +94,9 @@
                     </div>
                 </div>
 
-                <img src="/media/{{ post.featured_image }}" alt="{{ project.title }}" class="mt-3 rounded-2xl">
+                {% if post.featured_image %}
+                <img src="{{ post.featured_image.url }}" alt="{{ project.title }}" class="mt-3 rounded-2xl">
+                {% endif %}
             </header>
             <div class="mt-8 space-y-7 text-base text-gray-600 dark:text-gray-400 ql-content">
                 {{ post.body.html|safe }}

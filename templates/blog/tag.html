@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 
-{% block og_image %}{{ settings.profile_image }}{% endblock %}
+{% if settings.profile_image %}
+{% block og_image %}{{ settings.profile_image.url }}{% endblock %}
+{% endif %}
 
 {% block og_title %}
 {% block title %}

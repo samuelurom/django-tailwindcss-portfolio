@@ -15,11 +15,12 @@
     </title>
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
     </link>
-    <link rel="icon" type="image/x-icon" href="/media/{{ settings.icon }}">
+    {% if settings.icon %}
+    <link rel="icon" type="image/x-icon" href="{{ settings.icon.url }}">
+    {% endif %}
     <meta property="og:title" content="{% block og_title %}{% endblock %}" />
     <meta property="og:description" content="{% block og_description %}{% endblock %}" />
-    <meta property="og:image"
-        content="{{ request.scheme }}://{{ request.get_host }}/media/{% block og_image %}{% endblock %}" />
+    <meta property="og:image" content="{% block og_image %}{% endblock %}" />
     <script src="{% static 'js/theme.js' %}"></script>
     {% block header_includes %}{% endblock %}
 </head>
@@ -35,8 +36,10 @@
                             <div
                                 class="h-13 w-13 rounded-full bg-white/90 p-0.5 shadow-lg shadow-gray-800/5 ring-1 ring-gray-900/5 backdrop-blur dark:bg-gray-800/90 dark:ring-white/10">
                                 <a href="{% url 'home' %}" class="pointer-events-auto">
-                                    <img src="/media/{{ settings.profile_image }}" alt="{{ settings.name }}"
+                                    {% if settings.profile_image %}
+                                    <img src="{{ settings.profile_image.url }}" alt="{{ settings.name }}"
                                         class="rounded-full bg-gray-100 object-cover dark:bg-gray-800/90 h-14 w-14" />
+                                    {% endif %}
                                 </a>
                             </div>
                             {% endif %}
