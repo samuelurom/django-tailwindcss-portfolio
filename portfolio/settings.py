@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 
-# Import to manage environment variable
+# Import decouple to manage environment variable
 from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -92,11 +92,12 @@ else:
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.postgresql",
-            "NAME": config("POSTGRES_NAME"),
-            "URL": config("POSTGRES_URL"),
-            "USER": config("POSTGRES_USER"),
-            "PASSWORD": config("POSTGRES_PASSWORD"),
-            "HOST": config("POSTGRES_HOST"),
+            "NAME": config("PGDATABASE"),
+            "URL": config("PGDATABASE_URL"),
+            "USER": config("PGUSER"),
+            "PASSWORD": config("PGPASSWORD"),
+            "HOST": config("PGHOST"),
+            "PORT": config("PGPORT"),
         }
     }
 
