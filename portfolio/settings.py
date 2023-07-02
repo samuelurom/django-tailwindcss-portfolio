@@ -37,8 +37,8 @@ ALLOWED_HOSTS = [
 
 if not DEBUG:
     CRF_TRUSTED_ORIGINS = [
-        "samuelurom.up.railway.app",
-        "samuelurom.com",
+        "https://samuelurom.up.railway.app",
+        "https://samuelurom.com",
     ]
 
 # Application definition
