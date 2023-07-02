@@ -31,13 +31,13 @@ DEBUG = False
 
 ALLOWED_HOSTS = [
     "127.0.0.1",
-    ".up.railway.app",
+    "samuelurom.up.railway.app",
     "samuelurom.com",
 ]
 
 if not DEBUG:
     CRF_TRUSTED_ORIGINS = [
-        ".up.railway.app",
+        "samuelurom.up.railway.app",
         "samuelurom.com",
     ]
 
