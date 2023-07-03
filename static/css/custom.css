@@ -30,3 +30,15 @@
 .ql-editor h6 {
     margin-bottom: 1rem;
 }
+
+.main-content h2 {
+    font-size: 36px;
+    line-height: 1.2em;
+    font-weight: 600;
+}
+
+.main-content h3 {
+    font-size: 30px;
+    font-weight: 500;
+    line-height: 1.2em;
+}
