@@ -5,7 +5,6 @@
     padding: 1rem;
     border-radius: 1rem;
 }
-
 .ql-content p,
 .ql-content ol,
 .ql-content ul,
@@ -30,15 +29,25 @@
 .ql-editor h6 {
     margin-bottom: 1rem;
 }
-
 .main-content h2 {
     font-size: 36px;
     line-height: 1.2em;
     font-weight: 600;
 }
-
 .main-content h3 {
     font-size: 30px;
     font-weight: 500;
     line-height: 1.2em;
+}
+.main-content ul, .main-content ol {
+    list-style: disc;
+    margin-left: 2.5rem;
+}
+.main-content ul li {
+    margin-bottom: 1rem;
+}
+@media screen and (max-width: 480) {
+    .main-content ul, .main-content ol {
+        margin-left: 1rem;
+    }
 }
