@@ -29,6 +29,9 @@
 .ql-editor h6 {
     margin-bottom: 1rem;
 }
+.main-content {
+    line-height: 1.8;
+}
 .main-content h2 {
     font-size: 36px;
     line-height: 1.2em;
