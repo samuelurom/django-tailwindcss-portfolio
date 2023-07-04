@@ -254,7 +254,7 @@
                                         href="{% url 'contact' %}">Contact</a>
                                 </div>
                                 <p class="text-sm text-gray-400 dark:text-gray-500">
-                                    © {{ settings.footer_text }}
+                                    © {{ settings.footer_text|safe }}
                                 </p>
                             </div>
                         </div>
