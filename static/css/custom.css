@@ -52,6 +52,13 @@
     padding: 0.1em 0.5em;
     border-radius: 0.3em;
 }
+.main-content a {
+    border-bottom: 2px solid #14b8a6;
+    transition: auto;
+}
+.main-content a:hover {
+    color: #14b8a6;
+}
 @media screen and (max-width: 480px) {
     .main-content ul, .main-content ol {
         margin-left: 1rem;
