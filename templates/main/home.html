@@ -32,7 +32,7 @@
 {% block social_icons %}
 
 {% if settings.linkedin %}
-<a class="group -m-1 p-1" aria-label="Follow on LinkedIn" href="{{ settings.linkedin }}">
+<a class="group -m-1 p-1" aria-label="Follow on LinkedIn" href="{{ settings.linkedin }}" target="_blank">
     <svg viewBox="0 0 24 24" aria-hidden="true"
         class="h-6 w-6 fill-gray-500 transition group-hover:fill-gray-600 dark:fill-gray-400 dark:group-hover:fill-gray-300">
         <path
@@ -42,7 +42,7 @@
 </a>
 {% endif %}
 {% if settings.github %}
-<a class="group -m-1 p-1" aria-label="Follow on GitHub" href="{{ settings.github }}">
+<a class="group -m-1 p-1" aria-label="Follow on GitHub" href="{{ settings.github }}" target="_blank">
     <svg viewBox="0 0 24 24" aria-hidden="true"
         class="h-6 w-6 fill-gray-500 transition group-hover:fill-gray-600 dark:fill-gray-400 dark:group-hover:fill-gray-300">
         <path fill-rule="evenodd" clip-rule="evenodd"
@@ -52,7 +52,7 @@
 </a>
 {% endif %}
 {% if settings.twitter %}
-<a class="group -m-1 p-1" aria-label="Follow on Twitter" href="{{ settings.twitter }}">
+<a class="group -m-1 p-1" aria-label="Follow on Twitter" href="{{ settings.twitter }}" target="_blank">
     <svg viewBox="0 0 24 24" aria-hidden="true"
         class="h-6 w-6 fill-gray-500 transition group-hover:fill-gray-600 dark:fill-gray-400 dark:group-hover:fill-gray-300">
         <path
@@ -63,7 +63,7 @@
 {% endif %}
 {% if settings.youtube %}
 <a class="flex group -m-1 p-1 h-6 transition hover:gap-1 hover:text-gray-600 dark:text-gray-400 dark:hover:text-gray-300"
-    aria-label="Code Did This on YouTube" href="{{ settings.youtube }}">
+    aria-label="Code Did This on YouTube" href="{{ settings.youtube }}" target="_blank">
     <svg viewBox="0 0 576 500"
         class="h-6 w-6 fill-gray-500 transition group-hover:fill-gray-600 dark:fill-gray-400 dark:group-hover:fill-gray-300">
         <path
@@ -74,7 +74,7 @@
 {% endif %}
 {% if settings.email %}
 <a class="flex group -m-1 p-1 h-6 transition hover:gap-1 hover:text-gray-600 dark:text-gray-400 dark:hover:text-gray-300"
-    aria-label="Email me" href="mailto:{{ settings.email }}">
+    aria-label="Email me" href="mailto:{{ settings.email }}" target="_blank">
     <svg fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"
         class="h-6 w-6 fill-gray-500 transition group-hover:fill-gray-600 dark:fill-gray-400 dark:group-hover:fill-gray-300">
         <path d="M3 4a2 2 0 00-2 2v1.161l8.441 4.221a1.25 1.25 0 001.118 0L19 7.162V6a2 2 0 00-2-2H3z">
