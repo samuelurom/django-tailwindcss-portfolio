@@ -9,7 +9,7 @@ import math
 def blog(request):
     posts = Post.objects.only(
         "title", "slug", "description", "publish_date", "featured_image"
-    ).all()
+    ).filter(status="publish")
     settings = SiteSettings.objects.first()
     page_info = PageSettings.objects.only(
         "blog_archive_title", "blog_archive_description"
