@@ -46,7 +46,13 @@
 .main-content ul li {
     margin-bottom: 1rem;
 }
-@media screen and (max-width: 480) {
+.main-content .ql-font-monospace {
+    background-color: rgb(133 133 133 / 20%) !important;
+    font-family: Monaco,Menlo,Ubuntu Mono,Droid Sans Mono,Consolas,monospace;
+    padding: 0.2em 0.5em;
+    border-radius: 0.3em;
+}
+@media screen and (max-width: 480px) {
     .main-content ul, .main-content ol {
         margin-left: 1rem;
     }
